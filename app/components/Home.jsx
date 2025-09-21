@@ -1,103 +1,61 @@
-"use client";
-import { useState, useEffect } from "react";
-import { Menu, X, Home, Info, Lightbulb, Mail } from "lucide-react";
-import Image from "next/image";
+import React from "react";
+import { motion } from "framer-motion";
 
-const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-
-  const links = [
-    { name: "home", path: "#home", icon: <Home size={18} /> },
-    { name: "about", path: "#about", icon: <Info size={18} /> },
-    { name: "services", path: "#services", icon: <Lightbulb size={18} /> },
-    { name: "contact", path: "#contact", icon: <Mail size={18} /> },
-  ];
-
-  useEffect(() => {
-    const sections = document.querySelectorAll("section[id]");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { root: null, rootMargin: "-20% 0px -60% 0px" }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    return () => sections.forEach((section) => observer.unobserve(section));
-  }, []);
-
-  const navLinkStyles = (name) =>
-    `capitalize transition-all duration-200 px-3 py-1 rounded-md flex items-center gap-2 ${
-      activeSection === name
-        ? "text-yellow-500 bg-white/10 md:bg-transparent font-bold"
-        : "text-gray-300 hover:text-white hover:bg-white/10"
-    }`;
-
+function Home() {
   return (
-    <header className="fixed top-0 w-full z-50 py-3 backdrop-blur-md bg-black shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        {/* Logo + Company Name */}
-        <a
-          href="#home"
-          className="flex items-center gap-3 min-w-0"
-        >
-          <Image
-            src="/favicon.png"
-            alt="Logo"
-            width={48}
-            height={48}
-            className="w-10 h-10 sm:w-12 sm:h-12 object-contain flex-shrink-0"
-            priority
-          />
-          <span className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-xl truncate">
-            EverBright Multiple Resources Sdn. Bhd
-          </span>
-        </a>
+    <motion.section
+      id="home"
+      className="relative scroll-mt-26 min-h-screen flex flex-col-reverse md:flex-row items-center justify-between px-4 pt-10 sm:pt-12 md:pt-24 pb-10 md:px-[8%] bg-black overflow-hidden"
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      viewport={{ once: false, amount: 0.6 }}
+    >
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
+        style={{ backgroundImage: "url('/971.png')" }}
+      ></div>
 
-        {/* Hamburger Icon */}
-        <button
-          className="text-white md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent z-0"></div>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-6 text-base">
-          {links.map((link) => (
-            <a key={link.name} href={link.path} className={navLinkStyles(link.name)}>
-              {link.icon}
-              {link.name}
-            </a>
-          ))}
-        </nav>
-      </div>
+      {/* Top Center Heading */}
+      {/* <div className="absolute top-25 left-1/2 -translate-x-1/2 z-20 text-center">
+       <h1
+  className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white drop-shadow-lg uppercase font-[Montserrat]"
+>
+  Kita Pasang Aircon and Electrical Services
+</h1>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <nav className="md:hidden bg-black/80 px-6 pb-4 pt-2 text-base space-y-3">
-          {links.map((link) => (
-            <a
-              key={link.name}
-              href={link.path}
-              className={navLinkStyles(link.name)}
-              onClick={() => setIsOpen(false)}
-            >
-              {link.icon}
-              {link.name}
-            </a>
-          ))}
-        </nav>
-      )}
-    </header>
+      </div> */}
+
+      {/* Left Content */}
+      <motion.div className="relative z-10 w-full md:w-1/2 text-center md:text-left">
+        <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase">
+          Kita Pasang Aircon and Electrical Services
+        </h2>
+
+        <h2 className="mt-4 text-2xl md:text-3xl lg:text-4xl font-extrabold text-white">
+          SERVICES YOU CAN TRUST
+        </h2>
+
+        <h1 className="mt-6 text-lg md:text-xl lg:text-2xl text-gray-200">
+          Expert installation, repair, and maintenance for all your air
+          conditioning and electrical needs.
+        </h1>
+
+        <div className="mt-8">
+          <a
+            href="/contact"
+            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl shadow-lg hover:opacity-90 transition"
+          >
+            Get a Free Quote
+          </a>
+        </div>
+      </motion.div>
+    </motion.section>
   );
-};
+}
 
-export default Header;
+export default Home;
