@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Menu, X, Home, Info, Lightbulb, Mail } from "lucide-react";
+import Image from "next/image";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,7 @@ const Header = () => {
   const links = [
     { name: "home", path: "#home", icon: <Home size={18} /> },
     { name: "about", path: "#about", icon: <Info size={18} /> },
-    { name: "services", path: "#services", icon: <Lightbulb size={18} /> }, // updated icon
+    { name: "services", path: "#services", icon: <Lightbulb size={18} /> },
     { name: "contact", path: "#contact", icon: <Mail size={18} /> },
   ];
 
@@ -25,7 +26,7 @@ const Header = () => {
       },
       {
         root: null,
-        rootMargin: "-20% 0px -60% 0px", // account for fixed header
+        rootMargin: "-20% 0px -60% 0px",
       }
     );
 
@@ -44,13 +45,22 @@ const Header = () => {
     }`;
 
   return (
-    <header className="fixed top-0 w-full z-50 py-6 backdrop-blur-md bg-black shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
-        {/* Logo */}
-        <h1 className="text-lg sm:text-xl md:text-2xl font-semibold md:font-bold text-yellow-500 tracking-normal md:tracking-wide">
-  EverBright Multiple Resources{" "}
-  <span className="text-cyan-500">Sdn.Bhd</span>
-</h1>
+    <header className="fixed top-0 w-full z-50 py-4 backdrop-blur-md bg-black shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        {/* Logo + Company Name */}
+        <a href="#home" className="flex items-center gap-3">
+          <Image
+            src="/favicon.png"
+            alt="Logo"
+            width={48}
+            height={48}
+            className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+            priority
+          />
+          <span className="text-white font-bold text-lg sm:text-xl md:text-2xl tracking-tight">
+            EverBright Multiple Resources Sdn. Bhd
+          </span>
+        </a>
 
         {/* Hamburger Icon */}
         <button
