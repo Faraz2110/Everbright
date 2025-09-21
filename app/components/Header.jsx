@@ -47,9 +47,10 @@ const Header = () => {
     <header className="fixed top-0 w-full z-50 py-6 backdrop-blur-md bg-black shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-yellow-500 tracking-wide">
-          EverBright Multiple Resources <span className="text-cyan-500">Sdn.Bhd</span> 
-        </h1>
+        <h1 className="text-lg sm:text-xl md:text-2xl font-semibold md:font-bold text-yellow-500 tracking-normal md:tracking-wide">
+  EverBright Multiple Resources{" "}
+  <span className="text-cyan-500">Sdn.Bhd</span>
+</h1>
 
         {/* Hamburger Icon */}
         <button

@@ -34,7 +34,7 @@ function Footer() {
 7647
             </li>
             <li className="flex items-center gap-2">
-              <FaEnvelope className="text-cyan-400" /> info@kitapasang.com
+              <FaEnvelope className="text-cyan-400" /> everbrightmultipleresouressdn@gmail.com
             </li>
             <li className="flex items-center gap-2">
               <FaMapMarkerAlt className="text-cyan-400" /> Kuala Lumpur, Malaysia
