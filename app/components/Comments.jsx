@@ -27,18 +27,13 @@ function TestimonialsCarousel() {
   const [current, setCurrent] = useState(0);
   const length = testimonials.length;
 
-  const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
-  };
-
-  const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
-  };
+  const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
+  const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
 
   return (
     <section
       id="testimonials"
-      className="relative scroll-mt-24 min-h-screen flex flex-col items-center justify-center px-4 py-16 md:px-[8%] bg-black"
+      className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center px-4 md:px-[8%] bg-black"
     >
       {/* Heading */}
       <motion.div
@@ -56,7 +51,7 @@ function TestimonialsCarousel() {
         </p>
       </motion.div>
 
-      {/* Carousel Container */}
+      {/* Carousel */}
       <div className="relative w-full max-w-3xl flex items-center justify-center">
         {/* Left Arrow */}
         <button

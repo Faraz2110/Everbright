@@ -2,50 +2,24 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaUser, FaCommentDots } from "react-icons/fa";
-// import emailjs from "@emailjs/browser";
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const handleChange = (e) =>
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!formData.name || !formData.email || !formData.message) {
       setError("⚠️ Please fill in all fields.");
       return;
     }
-
     setLoading(true);
     setError("");
-
-    // Example emailjs code
-    // emailjs.send("serviceID", "templateID", formData, "publicKey")
-    //   .then(() => {
-    //     setSubmitted(true);
-    //     setFormData({ name: "", email: "", message: "" });
-    //   })
-    //   .catch(() => {
-    //     setError("❌ Something went wrong. Please try again later.");
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
-
     setTimeout(() => {
       setSubmitted(true);
       setLoading(false);
@@ -55,7 +29,7 @@ function Contact() {
   return (
     <motion.section
       id="contact"
-      className="bg-black min-h-screen flex items-center justify-center px-4 py-12"
+      className="bg-black scroll-mt-24 py-16 sm:py-20 lg:py-24 flex items-center justify-center px-4"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -82,69 +56,55 @@ function Contact() {
         {submitted ? (
           <motion.div
             className="text-center space-y-5"
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.6 }}
           >
-            <p className="text-green-500 font-medium text-lg">
-              ✅ Thank you! Your message has been sent.
-            </p>
+            <h2 className="text-2xl font-bold text-cyan-400">✅ Message Sent!</h2>
+            <p className="text-gray-300">Thank you for reaching out. We’ll contact you shortly.</p>
             <button
+              className="mt-4 px-5 py-2 bg-cyan-500 text-black font-medium rounded-lg hover:bg-cyan-600 transition"
               onClick={() => setSubmitted(false)}
-              className="inline-block bg-cyan-500 text-white font-medium py-2 px-6 rounded-lg hover:bg-cyan-600 transition"
             >
-              Send Another
+              Send Another Message
             </button>
           </motion.div>
         ) : (
-          <motion.form
-            onSubmit={handleSubmit}
-            className="space-y-6 overflow-y-auto max-h-[75vh] pr-2"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <form className="space-y-5" onSubmit={handleSubmit}>
             {/* Name */}
-            <div>
-              <label className="block text-gray-300 mb-2 text-sm flex items-center gap-2">
-                <FaUser className="text-cyan-400" /> Name
-              </label>
+            <div className="relative">
+              <FaUser className="absolute left-3 top-3.5 text-gray-500 text-sm" />
               <input
                 type="text"
                 name="name"
-                value={formData.name}
+                placeholder="Your Name"
+                className="w-full pl-10 pr-4 py-3 bg-black text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 onChange={handleChange}
-                className="w-full border border-gray-700 bg-black text-white rounded-lg px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
             </div>
 
             {/* Email */}
-            <div>
-              <label className="block text-gray-300 mb-2 text-sm flex items-center gap-2">
-                <FaEnvelope className="text-cyan-400" /> Email
-              </label>
+            <div className="relative">
+              <FaEnvelope className="absolute left-3 top-3.5 text-gray-500 text-sm" />
               <input
                 type="email"
                 name="email"
-                value={formData.email}
+                placeholder="Your Email"
+                className="w-full pl-10 pr-4 py-3 bg-black text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 onChange={handleChange}
-                className="w-full border border-gray-700 bg-black text-white rounded-lg px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-500"
               />
             </div>
 
             {/* Message */}
-            <div>
-              <label className="block text-gray-300 mb-2 text-sm flex items-center gap-2">
-                <FaCommentDots className="text-cyan-400" /> Message
-              </label>
+            <div className="relative">
+              <FaCommentDots className="absolute left-3 top-3.5 text-gray-500 text-sm" />
               <textarea
                 name="message"
-                value={formData.message}
+                placeholder="Your Message"
+                rows="4"
+                className="w-full pl-10 pr-4 py-3 bg-black text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
                 onChange={handleChange}
-                rows={4}
-                className="w-full border border-gray-700 bg-black text-white rounded-lg px-4 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-500"
-              />
+              ></textarea>
             </div>
 
             {/* Error */}
@@ -153,12 +113,12 @@ function Contact() {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full bg-cyan-500 text-white py-2 px-4 rounded-lg hover:bg-cyan-600 transition text-sm sm:text-base"
+              className="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-medium shadow-lg hover:opacity-90 transition"
               disabled={loading}
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
-          </motion.form>
+          </form>
         )}
       </motion.div>
     </motion.section>

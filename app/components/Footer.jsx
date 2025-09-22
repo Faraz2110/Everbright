@@ -11,7 +11,10 @@ import {
 
 function Footer() {
   return (
-    <footer className="bg-black text-gray-300 px-6 sm:px-8 md:px-[8%] py-12">
+    <footer
+      id="footer"
+      className="relative scroll-mt-24 bg-black text-gray-300 px-6 sm:px-8 md:px-[8%] py-16 sm:py-20 lg:py-24"
+    >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between gap-10">
         {/* Brand with Logo */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:min-w-[250px]">
@@ -75,7 +78,8 @@ function Footer() {
               <FaPhone className="text-cyan-400" /> +60 19‐871 7647
             </li>
             <li className="flex items-center justify-center md:justify-start gap-2">
-              <FaEnvelope className="text-cyan-400" /> everbrightmultipleresouressdn@gmail.com
+              <FaEnvelope className="text-cyan-400" />{" "}
+              everbrightmultipleresouressdn@gmail.com
             </li>
             <li className="flex items-center justify-center md:justify-start gap-2">
               <FaMapMarkerAlt className="text-cyan-400" /> Kuala Lumpur, Malaysia
@@ -99,7 +103,8 @@ function Footer() {
 
       {/* Bottom */}
       <div className="border-t border-gray-800 mt-10 pt-6 text-center text-sm sm:text-base text-gray-500">
-        © {new Date().getFullYear()} EverBright Multiple Resources Sdn. Bhd. All rights reserved.
+        © {new Date().getFullYear()} EverBright Multiple Resources Sdn. Bhd. All
+        rights reserved.
       </div>
     </footer>
   );

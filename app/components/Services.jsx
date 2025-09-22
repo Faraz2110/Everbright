@@ -33,7 +33,7 @@ function Services() {
   return (
     <motion.section
       id="services"
-      className="relative scroll-mt-24 py-16 flex flex-col items-center px-4 md:px-[8%] bg-black overflow-hidden"
+      className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 flex flex-col items-center px-4 md:px-[8%] bg-black overflow-hidden"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}

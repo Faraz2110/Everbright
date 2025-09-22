@@ -6,7 +6,7 @@ function About() {
   return (
     <motion.section
       id="about"
-      className="relative scroll-mt-24 min-h-screen flex flex-col items-center justify-center px-4 py-16 md:px-[8%] bg-black overflow-hidden"
+      className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center px-4 md:px-[8%] bg-black overflow-hidden"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -40,20 +40,28 @@ function About() {
             Your Comfort, Our Priority
           </h2>
           <p className="mb-4">
-            At <span className="text-cyan-400 font-semibold">Kita Pasang</span>, 
-            we specialize in delivering reliable <span className="text-cyan-400">air conditioning</span> 
-            and <span className="text-cyan-400">electrical solutions</span> that make homes and offices safer, cooler, and more energy-efficient. 
-            With years of hands-on experience, we’ve built a reputation for honesty, quality, and expert service.
+            At <span className="text-cyan-400 font-semibold">Kita Pasang</span>,
+            we specialize in delivering reliable{" "}
+            <span className="text-cyan-400">air conditioning</span> and{" "}
+            <span className="text-cyan-400">electrical solutions</span> that make
+            homes and offices safer, cooler, and more energy-efficient. With
+            years of hands-on experience, we’ve built a reputation for honesty,
+            quality, and expert service.
           </p>
           <p className="mb-4">
-            Whether it’s <span className="text-cyan-400">AC installation</span>, 
-            <span className="text-cyan-400">electrical repair</span>, or 
-            <span className="text-cyan-400">upgrading your lighting</span>, 
-            we approach every job with precision and care.
+            Whether it’s{" "}
+            <span className="text-cyan-400">AC installation</span>,{" "}
+            <span className="text-cyan-400">electrical repair</span>, or{" "}
+            <span className="text-cyan-400">upgrading your lighting</span>, we
+            approach every job with precision and care.
           </p>
           <p>
-            We believe in <span className="text-cyan-400 font-semibold">affordable solutions</span> 
-            without compromising quality — that’s why hundreds of clients trust us to keep their spaces running smoothly.
+            We believe in{" "}
+            <span className="text-cyan-400 font-semibold">
+              affordable solutions
+            </span>{" "}
+            without compromising quality — that’s why hundreds of clients trust
+            us to keep their spaces running smoothly.
           </p>
         </motion.div>
 
