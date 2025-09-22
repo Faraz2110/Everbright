@@ -33,46 +33,47 @@ function Contact() {
     setLoading(true);
     setError("");
 
-    const serviceID = "service_7q46svp";
-    const templateID = "template_u549e6m";
-    const publicKey = "738K8UXIAL06q35Bv";
+    // Example emailjs code
+    // emailjs.send("serviceID", "templateID", formData, "publicKey")
+    //   .then(() => {
+    //     setSubmitted(true);
+    //     setFormData({ name: "", email: "", message: "" });
+    //   })
+    //   .catch(() => {
+    //     setError("❌ Something went wrong. Please try again later.");
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
 
-    emailjs
-      .send(serviceID, templateID, formData, publicKey)
-      .then(() => {
-        setSubmitted(true);
-        setFormData({ name: "", email: "", message: "" });
-      })
-      .catch(() => {
-        setError("❌ Something went wrong. Please try again later.");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    setTimeout(() => {
+      setSubmitted(true);
+      setLoading(false);
+    }, 1000);
   };
 
   return (
     <motion.section
       id="contact"
-      className="min-h-screen scroll-mt-24 bg-black flex items-center justify-center px-4 py-16"
+      className="bg-black min-h-screen flex items-center justify-center px-4 py-12"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
-      viewport={{ once: true }}  
+      viewport={{ once: true }}
     >
       <motion.div
-        className="max-w-3xl w-full bg-[#0d0d0d] border border-gray-800 rounded-2xl shadow-lg p-8 sm:p-12"
+        className="w-full max-w-3xl bg-[#0d0d0d] border border-gray-800 rounded-2xl shadow-lg p-6 sm:p-10 flex flex-col justify-center"
         initial={{ y: 60, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        viewport={{ once: true }} 
+        viewport={{ once: true }}
       >
         {/* Heading */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-white">
             Get In <span className="text-cyan-400">Touch</span>
           </h1>
-          <p className="mt-3 text-gray-400 text-sm sm:text-base">
+          <p className="mt-2 text-gray-400 text-sm sm:text-base">
             Have a question, need a service, or want a free quote?  
             Fill in the form and we’ll get back to you.
           </p>
@@ -98,11 +99,11 @@ function Contact() {
         ) : (
           <motion.form
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className="space-y-6 overflow-y-auto max-h-[75vh] pr-2"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true }}  
+            viewport={{ once: true }}
           >
             {/* Name */}
             <div>

@@ -6,18 +6,18 @@ function About() {
   return (
     <motion.section
       id="about"
-      className="relative scroll-mt-24 min-h-screen flex flex-col items-center justify-center px-4 pt-16 pb-16 md:px-[8%] bg-black overflow-hidden"
+      className="relative scroll-mt-24 min-h-screen flex flex-col items-center justify-center px-4 py-16 md:px-[8%] bg-black overflow-hidden"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
-      viewport={{ once: false, amount: 0.5 }}
+      viewport={{ once: true }}
     >
       {/* Heading */}
       <motion.div
         className="relative z-10 text-center mb-12"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        viewport={{ once: true }}
       >
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase">
           About Us
