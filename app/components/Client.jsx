@@ -10,8 +10,7 @@ const clients = [
 
   { id: 1, name: "Client One", logo: "/client.png" },
 
-  { id: 1, name: "Client One", logo: "/client.png" },
-
+  
 ];
 
 export default function Clients() {

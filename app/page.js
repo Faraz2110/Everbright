@@ -20,8 +20,9 @@ export default function Page() {
        
         <HomeSection />
          {/* <Carousel/> */}
-        <Services />
+      
         <About />
+          <Services />
         <Contact />
         <Clients/>
         <TestimonialsCarousel/>

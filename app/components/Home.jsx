@@ -1,11 +1,12 @@
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 function Home() {
   return (
     <motion.section
       id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-[8%] text-center md:text-left bg-black overflow-hidden"
+      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-[8%] text-center md:text-left bg-black overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -19,17 +20,17 @@ function Home() {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent z-0"></div>
 
-      {/* Content */}
-      <motion.div className="relative z-10 w-full max-w-3xl">
-        <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase leading-tight">
+      {/* Text Content */}
+      <motion.div className="relative z-10 w-full md:w-1/2 max-w-3xl">
+        <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase leading-tight drop-shadow-lg">
           Kita Pasang Aircon and Electrical Services
         </h2>
 
-        <h2 className="mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white leading-snug">
+        <h2 className="mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white leading-snug drop-shadow-md">
           SERVICES YOU CAN TRUST
         </h2>
 
-        <p className="mt-6 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed">
+        <p className="mt-6 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed drop-shadow-sm">
           Expert installation, repair, and maintenance for all your air
           conditioning and electrical needs.
         </p>
@@ -42,6 +43,16 @@ function Home() {
             Get a Free Quote
           </a>
         </div>
+      </motion.div>
+
+      {/* Illustration */}
+      <motion.div
+        className="relative z-10 w-full md:w-1/2 mt-8 md:mt-0 flex justify-center"
+        initial={{ x: 100, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        
       </motion.div>
     </motion.section>
   );

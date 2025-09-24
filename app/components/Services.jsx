@@ -2,31 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const services = [
-  {
-    name: "Aircon Installation",
-    description: "Professional AC installation for homes & offices.",
-    price: 1200,
-  },
-  {
-    name: "Aircon Chemical Service",
-    description: "Deep cleaning & chemical treatment for ACs.",
-    price: 300,
-  },
-  {
-    name: "Aircon Overhaul Chemical Service",
-    description: "Full chemical overhaul for older AC units.",
-    price: 500,
-  },
-  {
-    name: "Aircon Repair Service",
-    description: "Expert repair for all types of AC issues.",
-    price: 400,
-  },
-  {
-    name: "Aircon Gas Refill Service",
-    description: "Refill AC gas for optimal cooling performance.",
-    price: 350,
-  },
+  { name: "Aircon Installation", description: "Professional AC installation for homes & offices.", price: 1200 },
+  { name: "Aircon Chemical Service", description: "Deep cleaning & chemical treatment for ACs.", price: 300 },
+  { name: "Aircon Overhaul Chemical Service", description: "Full chemical overhaul for older AC units.", price: 500 },
+  { name: "Aircon Repair Service", description: "Expert repair for all types of AC issues.", price: 400 },
+  { name: "Aircon Gas Refill Service", description: "Refill AC gas for optimal cooling performance.", price: 350 },
 ];
 
 // Animation variants
@@ -57,7 +37,7 @@ export default function ServiceCards() {
       className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 px-4 md:px-[8%] bg-black overflow-hidden"
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true }}
+      viewport={{ once: false, amount: 0.3 }} // animate every time
       variants={containerVariants}
     >
       {/* Heading */}
@@ -66,7 +46,7 @@ export default function ServiceCards() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.3 }}
       >
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase">
           Our Services
