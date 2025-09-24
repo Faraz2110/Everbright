@@ -65,6 +65,11 @@ function Footer() {
                 Contact
               </a>
             </li>
+            <li>
+              <a href="/dashboard" className="hover:text-cyan-400 transition">
+                Admin
+              </a>
+            </li>
           </ul>
         </div>
 

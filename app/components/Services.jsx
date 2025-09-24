@@ -1,90 +1,126 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaCheckCircle } from "react-icons/fa";
 
-function Services() {
-  const categories = [
-    {
-      title: "Aircon Services",
-      description:
-        "Expert installation, maintenance, and repair of air conditioning units to keep your space cool and comfortable.",
-      subServices: [
-        "Aircon Installation",
-        "Aircon Chemical Service",
-        "Aircon Overhaul Chemical Service",
-        "Aircon Repair Service",
-        "Aircon Gas Refill Service",
-        "Aircon Replacement Service",
-      ],
-    },
-    {
-      title: "Electrical Services",
-      description:
-        "Professional electrical installation and maintenance for homes, offices, and businesses.",
-      subServices: [
-        "Installation of Water Heater",
-        "Installation of Fans",
-        "Installation of Fancy Lights",
-        "Installation of Simple Lights",
-      ],
-    },
-  ];
+const services = [
+  {
+    name: "Aircon Installation",
+    description: "Professional AC installation for homes & offices.",
+    price: 1200,
+  },
+  {
+    name: "Aircon Chemical Service",
+    description: "Deep cleaning & chemical treatment for ACs.",
+    price: 300,
+  },
+  {
+    name: "Aircon Overhaul Chemical Service",
+    description: "Full chemical overhaul for older AC units.",
+    price: 500,
+  },
+  {
+    name: "Aircon Repair Service",
+    description: "Expert repair for all types of AC issues.",
+    price: 400,
+  },
+  {
+    name: "Aircon Gas Refill Service",
+    description: "Refill AC gas for optimal cooling performance.",
+    price: 350,
+  },
+];
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // delay between cards
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+export default function ServiceCards() {
   return (
     <motion.section
       id="services"
-      className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 flex flex-col items-center px-4 md:px-[8%] bg-black overflow-hidden"
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
+      className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 px-4 md:px-[8%] bg-black overflow-hidden"
+      initial="hidden"
+      whileInView="show"
       viewport={{ once: true }}
+      variants={containerVariants}
     >
       {/* Heading */}
       <motion.div
         className="relative z-10 text-center mb-12"
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        viewport={{ once: true }}
       >
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase">
           Our Services
         </h1>
         <p className="text-lg text-gray-300 mt-3 max-w-2xl mx-auto">
-          Explore the full range of services we provide
+          Affordable & Reliable Air Conditioning Solutions
         </p>
       </motion.div>
 
-      {/* Services Grid */}
-      <div className="relative z-10 grid gap-8 sm:grid-cols-2 w-full max-w-6xl">
-        {categories.map((category, index) => (
+      {/* Cards */}
+      <motion.div
+        className="max-w-7xl mx-auto grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        variants={containerVariants}
+      >
+        {services.map((service, index) => (
           <motion.div
             key={index}
-            className="bg-black/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-800 hover:border-cyan-500/80 transition duration-300"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 + index * 0.2 }}
-            viewport={{ once: false, amount: 0.3 }}
+            variants={cardVariants}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col cursor-pointer"
           >
-            <h3 className="text-xl font-semibold text-cyan-400 mb-3">
-              {category.title}
-            </h3>
-            <p className="text-gray-300 text-sm mb-5">{category.description}</p>
-            <ul className="space-y-3">
-              {category.subServices.map((sub, subIndex) => (
-                <li
-                  key={subIndex}
-                  className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition cursor-pointer"
+            {/* Image */}
+            <div className="h-56 w-full overflow-hidden">
+              <img
+                src="/image.png"
+                alt={service.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Content */}
+            <div className="p-5 flex flex-col justify-between flex-1">
+              <h3 className="text-yellow-400 font-bold text-lg mb-2 truncate">
+                {service.name}
+              </h3>
+              <p className="text-white text-sm mb-4 line-clamp-3">
+                {service.description}
+              </p>
+              <div className="flex justify-between items-center mt-auto">
+                <p className="text-yellow-400 font-bold text-lg">
+                  RM {service.price}
+                </p>
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ backgroundColor: "#0891b2" }}
+                  className="bg-cyan-500 text-black px-4 py-2 rounded-lg font-semibold transition"
                 >
-                  <FaCheckCircle className="text-cyan-400 text-sm" />
-                  {sub}
-                </li>
-              ))}
-            </ul>
+                  Book
+                </motion.button>
+              </div>
+            </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </motion.section>
   );
 }
-
-export default Services;

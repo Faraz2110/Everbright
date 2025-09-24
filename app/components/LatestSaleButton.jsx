@@ -11,7 +11,7 @@ const LatestSaleButton = () => {
         transition={{ type: "spring", stiffness: 250, damping: 18 }}
       >
         <Link
-          href="/offers" // ✅ change to your service page route
+          href="/promo" // ✅ change to your service page route
           className="relative px-5 py-2 rounded-xl shadow-lg flex items-center gap-2 font-semibold
                      bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white border border-yellow-200
                      hover:shadow-[0_0_20px_4px_rgba(255,200,0,0.7)] transition-all duration-300
@@ -21,7 +21,7 @@ const LatestSaleButton = () => {
             size={20}
             className="text-white animate-pulse drop-shadow-[0_0_6px_#FFD700]"
           />
-          <span className="tracking-wide">New Offers</span>
+          <span className="tracking-wide">New Promo</span>
         </Link>
       </motion.div>
     </div>

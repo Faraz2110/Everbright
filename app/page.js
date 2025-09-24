@@ -6,6 +6,8 @@ import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import TestimonialsCarousel from "./components/Comments";
+import Carousel from "./components/Carousel";
+import Clients from "./components/Client";
 
 export default function Page() {
   return (
@@ -15,10 +17,13 @@ export default function Page() {
 
       {/* Main content */}
       <main className="flex-1">
+       
         <HomeSection />
-        <About />
+         {/* <Carousel/> */}
         <Services />
+        <About />
         <Contact />
+        <Clients/>
         <TestimonialsCarousel/>
       </main>
 

@@ -30,6 +30,32 @@ function TestimonialsCarousel() {
   const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
   const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
 
+  // Animation variants for smoother transitions
+  const variants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 100 : -100,
+      opacity: 0,
+      scale: 0.9,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+      },
+    },
+    exit: (direction) => ({
+      x: direction < 0 ? 100 : -100,
+      opacity: 0,
+      scale: 0.9,
+      transition: { duration: 0.4 },
+    }),
+  };
+
   return (
     <section
       id="testimonials"
@@ -52,7 +78,7 @@ function TestimonialsCarousel() {
       </motion.div>
 
       {/* Carousel */}
-      <div className="relative w-full max-w-3xl flex items-center justify-center">
+      <div className="relative w-full max-w-3xl flex items-center justify-center overflow-hidden">
         {/* Left Arrow */}
         <button
           onClick={prevSlide}
@@ -61,29 +87,25 @@ function TestimonialsCarousel() {
           <FaChevronLeft size={20} />
         </button>
 
-        {/* Carousel Card */}
-        <AnimatePresence>
-          {testimonials.map(
-            (testimonial, index) =>
-              index === current && (
-                <motion.div
-                  key={index}
-                  className="relative w-full p-8 bg-black/70 backdrop-blur-md rounded-2xl shadow-lg border border-gray-800 mx-4"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <div className="flex items-start gap-3 text-cyan-400 mb-4">
-                    <FaQuoteLeft size={24} />
-                    <p className="text-gray-300">{testimonial.comment}</p>
-                    <FaQuoteRight size={24} />
-                  </div>
-                  <p className="text-cyan-400 font-semibold mt-4">{testimonial.name}</p>
-                  <p className="text-gray-400 text-sm">{testimonial.role}</p>
-                </motion.div>
-              )
-          )}
+        {/* AnimatePresence for slide animation */}
+        <AnimatePresence custom={1} initial={false}>
+          <motion.div
+            key={current}
+            variants={variants}
+            custom={1} // positive direction for next
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="relative w-full p-8 bg-black/70 backdrop-blur-md rounded-2xl shadow-lg border border-gray-800 mx-4"
+          >
+            <div className="flex items-start gap-3 text-cyan-400 mb-4">
+              <FaQuoteLeft size={24} />
+              <p className="text-gray-300">{testimonials[current].comment}</p>
+              <FaQuoteRight size={24} />
+            </div>
+            <p className="text-cyan-400 font-semibold mt-4">{testimonials[current].name}</p>
+            <p className="text-gray-400 text-sm">{testimonials[current].role}</p>
+          </motion.div>
         </AnimatePresence>
 
         {/* Right Arrow */}
