@@ -87,7 +87,7 @@ function About() {
             transition={{ duration: 0.5 }}
           >
             <Image
-              src="/about_illustration.png "
+              src="/about_illustration_main.png"
               alt="Main Illustration"
               fill
               className="object-contain"
@@ -104,7 +104,7 @@ function About() {
             transition={{ duration: 0.5, delay: 0.8 }}
           >
             <Image
-              src="/about_illustration_main.png"
+              src="/about_illustration.png"
               alt="Secondary Illustration"
               fill
               className="object-contain"
