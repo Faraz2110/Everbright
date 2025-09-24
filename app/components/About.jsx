@@ -87,7 +87,7 @@ function About() {
             transition={{ duration: 0.5 }}
           >
             <Image
-              src="/about_illustration.png "
+              src="/6488484.png "
               alt="Main Illustration"
               fill
               className="object-contain"
