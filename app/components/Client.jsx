@@ -1,16 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useAnimation, useInView } from "framer-motion";
 import { FaTools, FaBolt, FaRegSmileBeam, FaHandshake, FaClock } from "react-icons/fa";
-
-const containerVariant = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15, // subtle stagger between elements
-    },
-  },
-};
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 30 },
@@ -20,18 +11,33 @@ const fadeUpVariant = {
 export default function About() {
   const [mainLoaded, setMainLoaded] = useState(false);
 
+  // For triggering animation only once
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) controls.start("visible");
+  }, [isInView, controls]);
+
   return (
     <section
       id="about"
       className="relative scroll-mt-24 py-12 sm:py-16 lg:py-24 px-4 md:px-[8%] bg-black flex flex-col lg:flex-row items-center gap-10 lg:gap-12 overflow-hidden"
+      ref={ref}
     >
       {/* Left Content */}
       <motion.div
         className="flex-1 text-gray-300"
-        variants={containerVariant}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        animate={controls}
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.15,
+            },
+          },
+        }}
       >
         <motion.h1
           className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase mb-4"
@@ -47,13 +53,12 @@ export default function About() {
           Your Comfort, Our Priority
         </motion.h2>
         <motion.p className="mb-4" variants={fadeUpVariant}>
-          At <span className="text-cyan-400 font-semibold">Kita Pasang</span>, we specialize in delivering reliable <span className="text-cyan-400">air conditioning</span> and <span className="text-cyan-400">electrical solutions</span> that make homes and offices safer, cooler, and energy-efficient. With years of experience, we’ve built a reputation for honesty, quality, and expert service.
+          At <span className="text-cyan-400 font-semibold">Kita Pasang</span>, we specialize in reliable <span className="text-cyan-400">air conditioning</span> and <span className="text-cyan-400">electrical solutions</span>. We make homes and offices safer, cooler, and energy-efficient.
         </motion.p>
         <motion.p className="mb-6" variants={fadeUpVariant}>
           Whether it’s <span className="text-cyan-400">AC installation</span>, <span className="text-cyan-400">electrical repair</span>, or <span className="text-cyan-400">lighting upgrades</span>, we approach every job with precision and care.
         </motion.p>
 
-        {/* Why Choose Us Card */}
         <motion.div
           className="bg-black/70 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-gray-800 hover:border-cyan-500 transition duration-300 max-w-md"
           variants={fadeUpVariant}
@@ -84,16 +89,12 @@ export default function About() {
       </motion.div>
 
       {/* Right Illustration */}
-      <motion.div
-        className="flex-1 relative w-full max-w-xl"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariant}
-      >
+      <motion.div className="flex-1 relative w-full max-w-xl">
         <motion.div
           className="relative w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden"
-          variants={fadeUpVariant}
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {/* Main Image */}
           <motion.div
@@ -115,7 +116,7 @@ export default function About() {
           {mainLoaded && (
             <motion.div
               className="absolute top-0 right-0 sm:top-2 sm:right-2 md:top-[-2rem] md:right-[-2rem] w-20 sm:w-24 md:w-36 h-20 sm:h-24 md:h-36 rounded-2xl shadow-lg border border-cyan-500"
-              initial={{ opacity: 0, scale: 0.85 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ rotate: 3, scale: 1.05 }}
               transition={{ duration: 0.5, delay: 0.2 }}
