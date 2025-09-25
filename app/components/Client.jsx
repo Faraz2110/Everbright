@@ -1,65 +1,135 @@
-"use client";
-
-import React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { FaTools, FaBolt, FaRegSmileBeam, FaHandshake, FaClock } from "react-icons/fa";
 
-// Clients array (all using same logo)
-const clients = [
-  { id: 1, name: "Client One", logo: "/client.png" },
-  { id: 1, name: "Client One", logo: "/client.png" },
+const containerVariant = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15, // subtle stagger between elements
+    },
+  },
+};
 
-  { id: 1, name: "Client One", logo: "/client.png" },
+const fadeUpVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
-  
-];
+export default function About() {
+  const [mainLoaded, setMainLoaded] = useState(false);
 
-export default function Clients() {
   return (
-    <motion.section
-      id="clients"
-      className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 flex flex-col items-center px-4 md:px-[8%] bg-black"
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
-      viewport={{ once: true }}
+    <section
+      id="about"
+      className="relative scroll-mt-24 py-12 sm:py-16 lg:py-24 px-4 md:px-[8%] bg-black flex flex-col lg:flex-row items-center gap-10 lg:gap-12 overflow-hidden"
     >
-      {/* Heading */}
+      {/* Left Content */}
       <motion.div
-        className="text-center mb-12"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        className="flex-1 text-gray-300"
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
       >
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase">
-          Our Clients
-        </h1>
-        <p className="text-lg text-gray-300 mt-3 max-w-2xl mx-auto">
-          Trusted by these amazing companies and partners
-        </p>
+        <motion.h1
+          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase mb-4"
+          variants={fadeUpVariant}
+        >
+          About Us
+        </motion.h1>
+        <motion.p className="text-lg text-gray-300 mb-6" variants={fadeUpVariant}>
+          Professional Aircon & Electrical Services You Can Trust
+        </motion.p>
+
+        <motion.h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-4" variants={fadeUpVariant}>
+          Your Comfort, Our Priority
+        </motion.h2>
+        <motion.p className="mb-4" variants={fadeUpVariant}>
+          At <span className="text-cyan-400 font-semibold">Kita Pasang</span>, we specialize in delivering reliable <span className="text-cyan-400">air conditioning</span> and <span className="text-cyan-400">electrical solutions</span> that make homes and offices safer, cooler, and energy-efficient. With years of experience, we’ve built a reputation for honesty, quality, and expert service.
+        </motion.p>
+        <motion.p className="mb-6" variants={fadeUpVariant}>
+          Whether it’s <span className="text-cyan-400">AC installation</span>, <span className="text-cyan-400">electrical repair</span>, or <span className="text-cyan-400">lighting upgrades</span>, we approach every job with precision and care.
+        </motion.p>
+
+        {/* Why Choose Us Card */}
+        <motion.div
+          className="bg-black/70 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-gray-800 hover:border-cyan-500 transition duration-300 max-w-md"
+          variants={fadeUpVariant}
+          whileHover={{ scale: 1.02 }}
+        >
+          <h3 className="text-xl font-semibold text-cyan-400 mb-5">
+            Why Choose Kita Pasang?
+          </h3>
+          <ul className="space-y-4 text-gray-300">
+            {[
+              { icon: <FaTools />, text: "Skilled Technicians with Years of Experience" },
+              { icon: <FaBolt />, text: "Safe, Efficient & Energy-Saving Solutions" },
+              { icon: <FaRegSmileBeam />, text: "Friendly Service & Honest Recommendations" },
+              { icon: <FaHandshake />, text: "Transparent Pricing – No Hidden Charges" },
+              { icon: <FaClock />, text: "On-Time Service & Long-Term Support" },
+            ].map((item, idx) => (
+              <motion.li
+                key={idx}
+                className="flex items-center gap-3 hover:text-cyan-400 transition"
+                variants={fadeUpVariant}
+              >
+                {React.cloneElement(item.icon, { className: "text-cyan-400 text-lg" })}
+                {item.text}
+              </motion.li>
+            ))}
+          </ul>
+        </motion.div>
       </motion.div>
 
-      {/* Logos Container */}
+      {/* Right Illustration */}
       <motion.div
-        className="relative z-10 w-full flex flex-wrap justify-center items-center gap-8 max-w-6xl"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        className="flex-1 relative w-full max-w-xl"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariant}
       >
-        {clients.map((client) => (
+        <motion.div
+          className="relative w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden"
+          variants={fadeUpVariant}
+        >
+          {/* Main Image */}
           <motion.div
-            key={client.id}
-            className="flex justify-center items-center bg-gray-900/70 border border-gray-800 rounded-2xl shadow-lg p-4 hover:border-cyan-500 transition duration-300"
-            style={{ width: "160px", height: "120px" }} // fixed card size
-            whileHover={{ scale: 1.05 }}
+            className="absolute inset-0 rounded-3xl shadow-2xl border border-gray-800"
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.5 }}
           >
-            <img
-              src={client.logo}
-              alt={client.name}
-              className="max-w-full max-h-full object-contain"
+            <Image
+              src="/about_illustration_main.png"
+              alt="Main Illustration"
+              fill
+              className="object-cover"
+              priority
+              onLoadingComplete={() => setMainLoaded(true)}
             />
           </motion.div>
-        ))}
+
+          {/* Secondary Image */}
+          {mainLoaded && (
+            <motion.div
+              className="absolute top-0 right-0 sm:top-2 sm:right-2 md:top-[-2rem] md:right-[-2rem] w-20 sm:w-24 md:w-36 h-20 sm:h-24 md:h-36 rounded-2xl shadow-lg border border-cyan-500"
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ rotate: 3, scale: 1.05 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Image
+                src="/about_illustration.png"
+                alt="Secondary Illustration"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          )}
+        </motion.div>
       </motion.div>
-    </motion.section>
+    </section>
   );
 }
