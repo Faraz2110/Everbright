@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 function Home() {
@@ -8,8 +7,8 @@ function Home() {
       id="home"
       className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-[8%] text-center md:text-left bg-black overflow-hidden"
       initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }} // subtle fade-in
     >
       {/* Background Image */}
       <div
@@ -21,7 +20,12 @@ function Home() {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent z-0"></div>
 
       {/* Text Content */}
-      <motion.div className="relative z-10 w-full md:w-1/2 max-w-3xl">
+      <motion.div
+        className="relative z-10 w-full md:w-1/2 max-w-3xl"
+        initial={{ x: -20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} // subtle slide-in
+      >
         <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase leading-tight drop-shadow-lg">
           Kita Pasang Aircon and Electrical Services
         </h2>
@@ -48,11 +52,11 @@ function Home() {
       {/* Illustration */}
       <motion.div
         className="relative z-10 w-full md:w-1/2 mt-8 md:mt-0 flex justify-center"
-        initial={{ x: 100, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        initial={{ x: 20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }} // subtle slide-in
       >
-        
+        {/* You can place your illustration/image here */}
       </motion.div>
     </motion.section>
   );

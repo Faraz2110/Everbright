@@ -11,23 +11,17 @@ const services = [
 
 // Animation variants
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   show: {
-    opacity: 1,
     transition: {
-      staggerChildren: 0.2, // delay between cards
+      staggerChildren: 0.2, // stagger cards
     },
   },
 };
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40, scale: 0.95 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 export default function ServiceCards() {
@@ -37,7 +31,7 @@ export default function ServiceCards() {
       className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 px-4 md:px-[8%] bg-black overflow-hidden"
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.3 }} // animate every time
+      viewport={{ once: true, amount: 0.3 }} // animate once
       variants={containerVariants}
     >
       {/* Heading */}
@@ -45,8 +39,8 @@ export default function ServiceCards() {
         className="relative z-10 text-center mb-12"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
-        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
       >
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase">
           Our Services
