@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaTools, FaBolt, FaRegSmileBeam, FaHandshake, FaClock } from "react-icons/fa";
 
 function About() {
+  const [mainLoaded, setMainLoaded] = useState(false);
+
   return (
     <motion.section
       id="about"
-      className="relative scroll-mt-24 py-12 sm:py-16 lg:py-24 px-4 md:px-[8%] bg-black flex flex-col lg:flex-row items-center gap-10 lg:gap-12 overflow-visible"
+      className="relative scroll-mt-24 py-12 sm:py-16 lg:py-24 px-4 md:px-[8%] bg-black flex flex-col lg:flex-row items-center gap-10 lg:gap-12 overflow-hidden"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -19,6 +21,7 @@ function About() {
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
+        viewport={{ once: true }}
       >
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase mb-4">
           About Us
@@ -43,6 +46,7 @@ function About() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
+          viewport={{ once: true }}
         >
           <h3 className="text-xl font-semibold text-cyan-400 mb-5">
             Why Choose Kita Pasang?
@@ -72,17 +76,18 @@ function About() {
         </motion.div>
       </motion.div>
 
-      {/* Right Illustration with two images */}
+      {/* Right Illustration */}
       <motion.div
         className="flex-1 relative w-full max-w-xl"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.7 }}
+        viewport={{ once: true }}
       >
-        <div className="relative w-full">
+        <div className="relative w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden">
           {/* Main Image */}
           <motion.div
-            className="w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border border-gray-800"
+            className="absolute inset-0 rounded-3xl shadow-2xl border border-gray-800"
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.5 }}
           >
@@ -92,25 +97,27 @@ function About() {
               fill
               className="object-cover"
               priority
+              onLoadingComplete={() => setMainLoaded(true)}
             />
           </motion.div>
 
-          {/* Secondary Image (floating, fully responsive) */}
-          <motion.div
-            className="absolute top-0 right-0 sm:top-2 sm:right-2 md:top-[-2rem] md:right-[-2rem] w-20 sm:w-24 md:w-36 h-20 sm:h-24 md:h-36 rounded-2xl shadow-lg border border-cyan-500 overflow-hidden"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            whileHover={{ rotate: 5, scale: 1.05 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            <Image
-              src="/about_illustration.png"
-              alt="Secondary Illustration"
-              fill
-              className="object-cover"
-              priority
-            />
-          </motion.div>
+          {/* Secondary Image (floating, appears after main loads) */}
+          {mainLoaded && (
+            <motion.div
+              className="absolute top-0 right-0 sm:top-2 sm:right-2 md:top-[-2rem] md:right-[-2rem] w-20 sm:w-24 md:w-36 h-20 sm:h-24 md:h-36 rounded-2xl shadow-lg border border-cyan-500"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ rotate: 5, scale: 1.05 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Image
+                src="/about_illustration.png"
+                alt="Secondary Illustration"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          )}
         </div>
       </motion.div>
     </motion.section>
