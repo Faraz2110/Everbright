@@ -5,13 +5,13 @@ import { FaTools, FaBolt, FaRegSmileBeam, FaHandshake, FaClock } from "react-ico
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
 export default function About() {
   const [mainLoaded, setMainLoaded] = useState(false);
 
-  // For triggering animation only once
+  // Section ref for animation trigger
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const controls = useAnimation();
@@ -32,17 +32,10 @@ export default function About() {
         initial="hidden"
         animate={controls}
         variants={{
-          visible: {
-            transition: {
-              staggerChildren: 0.15,
-            },
-          },
+          visible: { transition: { staggerChildren: 0.15 } },
         }}
       >
-        <motion.h1
-          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase mb-4"
-          variants={fadeUpVariant}
-        >
+        <motion.h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase mb-4" variants={fadeUpVariant}>
           About Us
         </motion.h1>
         <motion.p className="text-lg text-gray-300 mb-6" variants={fadeUpVariant}>
@@ -90,46 +83,40 @@ export default function About() {
 
       {/* Right Illustration */}
       <motion.div className="flex-1 relative w-full max-w-xl">
+        {/* Main Image with fade-in */}
         <motion.div
-          className="relative w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden"
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden rounded-3xl shadow-2xl border border-gray-800"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 1, ease: "easeOut" }}
         >
-          {/* Main Image */}
+          <Image
+            src="/about_illustration_main.png"
+            alt="Main Illustration"
+            fill
+            className="object-cover"
+            priority
+            onLoadingComplete={() => setMainLoaded(true)}
+          />
+        </motion.div>
+
+        {/* Secondary Image with fade + slight pop */}
+        {mainLoaded && (
           <motion.div
-            className="absolute inset-0 rounded-3xl shadow-2xl border border-gray-800"
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.5 }}
+            className="absolute top-0 right-0 sm:top-2 sm:right-2 md:top-[-2rem] md:right-[-2rem] w-20 sm:w-24 md:w-36 h-20 sm:h-24 md:h-36 rounded-2xl shadow-lg border border-cyan-500"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            whileHover={{ rotate: 3, scale: 1.05 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
           >
             <Image
-              src="/about_illustration_main.png"
-              alt="Main Illustration"
+              src="/about_illustration.png"
+              alt="Secondary Illustration"
               fill
               className="object-cover"
-              priority
-              onLoadingComplete={() => setMainLoaded(true)}
             />
           </motion.div>
-
-          {/* Secondary Image */}
-          {mainLoaded && (
-            <motion.div
-              className="absolute top-0 right-0 sm:top-2 sm:right-2 md:top-[-2rem] md:right-[-2rem] w-20 sm:w-24 md:w-36 h-20 sm:h-24 md:h-36 rounded-2xl shadow-lg border border-cyan-500"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ rotate: 3, scale: 1.05 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <Image
-                src="/about_illustration.png"
-                alt="Secondary Illustration"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-          )}
-        </motion.div>
+        )}
       </motion.div>
     </section>
   );
