@@ -7,7 +7,7 @@ function About() {
   return (
     <motion.section
       id="about"
-      className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 px-4 md:px-[8%] bg-black flex flex-col lg:flex-row items-center gap-12 overflow-visible"
+      className="relative scroll-mt-24 py-12 sm:py-16 lg:py-24 px-4 md:px-[8%] bg-black flex flex-col lg:flex-row items-center gap-10 lg:gap-12 overflow-visible"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -20,14 +20,14 @@ function About() {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase mb-4">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase mb-4">
           About Us
         </h1>
         <p className="text-lg text-gray-300 mb-6">
           Professional Aircon & Electrical Services You Can Trust
         </p>
 
-        <h2 className="text-2xl md:text-3xl font-bold text-cyan-400 mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-4">
           Your Comfort, Our Priority
         </h2>
         <p className="mb-4">
@@ -79,10 +79,10 @@ function About() {
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.7 }}
       >
-        <div className="relative w-full aspect-[16/9]">
+        <div className="relative w-full">
           {/* Main Image */}
           <motion.div
-            className="absolute inset-0 rounded-3xl overflow-visible shadow-2xl border border-gray-800"
+            className="w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border border-gray-800"
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.5 }}
           >
@@ -90,14 +90,14 @@ function About() {
               src="/about_illustration_main.png"
               alt="Main Illustration"
               fill
-              className="object-contain"
+              className="object-cover"
               priority
             />
           </motion.div>
 
-          {/* Secondary Image (floating) */}
+          {/* Secondary Image (floating, fully responsive) */}
           <motion.div
-            className="absolute -top-12 -right-12 w-36 h-36 rounded-2xl shadow-lg border border-cyan-500 overflow-hidden"
+            className="absolute top-0 right-0 sm:top-2 sm:right-2 md:top-[-2rem] md:right-[-2rem] w-20 sm:w-24 md:w-36 h-20 sm:h-24 md:h-36 rounded-2xl shadow-lg border border-cyan-500 overflow-hidden"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             whileHover={{ rotate: 5, scale: 1.05 }}
@@ -107,7 +107,7 @@ function About() {
               src="/about_illustration.png"
               alt="Secondary Illustration"
               fill
-              className="object-contain"
+              className="object-cover"
               priority
             />
           </motion.div>
