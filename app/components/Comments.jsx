@@ -1,6 +1,12 @@
+"use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaQuoteLeft, FaQuoteRight, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  FaQuoteLeft,
+  FaQuoteRight,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 
 const testimonials = [
   {
@@ -28,32 +34,22 @@ function TestimonialsCarousel() {
   const length = testimonials.length;
 
   const paginate = (newDirection) => {
-    setCurrent([
-      (current + newDirection + length) % length,
-      newDirection,
-    ]);
+    setCurrent([(current + newDirection + length) % length, newDirection]);
   };
 
   const variants = {
     enter: (direction) => ({
       x: direction > 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.8,
     }),
     center: {
       x: 0,
       opacity: 1,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 20,
-      },
+      transition: { type: "tween", duration: 0.5 },
     },
     exit: (direction) => ({
       x: direction < 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.8,
       transition: { duration: 0.4 },
     }),
   };
@@ -77,42 +73,48 @@ function TestimonialsCarousel() {
       </motion.div>
 
       {/* Carousel */}
-      <div className="relative w-full max-w-3xl flex items-center justify-center overflow-hidden">
+      <div className="relative w-full max-w-3xl flex items-center justify-center py-2 overflow-hidden">
         {/* Left Arrow */}
         <button
           onClick={() => paginate(-1)}
-          className="absolute left-2 md:left-0 top-1/2 transform -translate-y-1/2 z-30 p-2 md:p-4 bg-cyan-500/70 hover:bg-cyan-500 text-black rounded-full shadow-lg transition flex items-center justify-center"
+          className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-30 p-2 md:p-4 bg-cyan-500/70 hover:bg-cyan-500 text-black rounded-full shadow-lg transition flex items-center justify-center"
         >
           <FaChevronLeft size={20} />
         </button>
 
-        {/* AnimatePresence */}
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={current}
-            variants={variants}
-            custom={direction}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            className="relative w-full p-8 bg-black/70 backdrop-blur-md rounded-2xl shadow-lg border border-gray-800 mx-4 flex flex-col gap-4"
-          >
-            <div className="flex items-start gap-3 text-cyan-400">
-              <FaQuoteLeft size={24} />
-              <p className="text-gray-300 text-base md:text-lg">{testimonials[current].comment}</p>
-              <FaQuoteRight size={24} />
-            </div>
-            <div>
-              <p className="text-cyan-400 font-semibold">{testimonials[current].name}</p>
-              <p className="text-gray-400 text-sm">{testimonials[current].role}</p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+        {/* AnimatePresence with fixed height wrapper */}
+        <div className="relative w-full h-[260px] flex items-center justify-center">
+          <AnimatePresence initial={false} custom={direction} mode="wait">
+            <motion.div
+              key={current}
+              variants={variants}
+              custom={direction}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="absolute w-full h-full px-8 py-10 bg-black/70 backdrop-blur-md 
+                         rounded-2xl shadow-lg border border-gray-800 
+                         flex flex-col justify-between text-center"
+            >
+              <div className="flex items-start gap-3 text-cyan-400">
+                <FaQuoteLeft size={20} className="mt-1 shrink-0" />
+                <p className="text-gray-300 text-base md:text-lg leading-relaxed flex-1 text-left line-clamp-3">
+                  {testimonials[current].comment}
+                </p>
+                <FaQuoteRight size={20} className="mt-1 shrink-0" />
+              </div>
+              <div>
+                <p className="text-cyan-400 font-semibold">{testimonials[current].name}</p>
+                <p className="text-gray-400 text-sm">{testimonials[current].role}</p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         {/* Right Arrow */}
         <button
           onClick={() => paginate(1)}
-          className="absolute right-2 md:right-0 top-1/2 transform -translate-y-1/2 z-30 p-2 md:p-4 bg-cyan-500/70 hover:bg-cyan-500 text-black rounded-full shadow-lg transition flex items-center justify-center"
+          className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-30 p-2 md:p-4 bg-cyan-500/70 hover:bg-cyan-500 text-black rounded-full shadow-lg transition flex items-center justify-center"
         >
           <FaChevronRight size={20} />
         </button>
