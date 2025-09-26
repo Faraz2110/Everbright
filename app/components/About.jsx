@@ -100,8 +100,9 @@ function About() {
           {/* Main Image */}
           <motion.div
             className="absolute inset-0 rounded-3xl shadow-2xl border border-gray-800"
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <Image
               src="/about_illustration_main.png"
@@ -116,11 +117,11 @@ function About() {
           {/* Secondary Image */}
           {mainLoaded && (
             <motion.div
-              className="absolute top-0 right-0 sm:top-2 sm:right-2 md:top-[-2rem] md:right-[-2rem] w-20 sm:w-24 md:w-36 h-20 sm:h-24 md:h-36 rounded-2xl shadow-lg border border-cyan-500"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ rotate: 5, scale: 1.05 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 w-24 sm:w-32 md:w-40 h-24 sm:h-32 md:h-40 rounded-2xl shadow-lg border border-cyan-500 overflow-hidden"
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ rotate: 3, scale: 1.05 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
             >
               <Image
                 src="/about_illustration.png"
