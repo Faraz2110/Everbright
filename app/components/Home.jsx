@@ -8,11 +8,11 @@ function Home() {
       className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-[8%] text-center md:text-left bg-black overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }} // subtle fade-in
+      transition={{ duration: 0.8, ease: "easeInOut" }}
     >
-      {/* Background Image */}
+      {/* Background Image (Desktop only) */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
         style={{ backgroundImage: "url('/971.png')" }}
       ></div>
 
@@ -24,7 +24,7 @@ function Home() {
         className="relative z-10 w-full md:w-1/2 max-w-3xl"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }} // subtle slide-in
+        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
       >
         <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase leading-tight drop-shadow-lg">
           Kita Pasang Aircon and Electrical Services
@@ -47,16 +47,25 @@ function Home() {
             Get a Free Quote
           </a>
         </div>
+
+        {/* Image for Small Devices */}
+        <div className="mt-10 md:hidden flex justify-center">
+          <img
+            src="/hometop.png"
+            alt="Home Illustration"
+            className="max-w-xs sm:max-w-sm w-full drop-shadow-xl rounded-2xl"
+          />
+        </div>
       </motion.div>
 
-      {/* Illustration */}
+      {/* Illustration (Right Side for Desktop) */}
       <motion.div
         className="relative z-10 w-full md:w-1/2 mt-8 md:mt-0 flex justify-center"
         initial={{ x: 20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }} // subtle slide-in
+        transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
       >
-        {/* You can place your illustration/image here */}
+        {/* You can place desktop illustration/image here */}
       </motion.div>
     </motion.section>
   );

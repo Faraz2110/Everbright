@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaPhone, FaUser, FaCommentDots } from "react-icons/fa";
+import { FaPhone, FaUser, FaCommentDots, FaEnvelope } from "react-icons/fa";
 
 function Contact() {
-  const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,10 +14,17 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.message) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
       setError("⚠️ Please fill in all fields.");
       return;
     }
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError("⚠️ Please enter a valid email address.");
+      return;
+    }
+
     setLoading(true);
     setError("");
     setTimeout(() => {
@@ -78,6 +85,18 @@ function Contact() {
                 type="text"
                 name="name"
                 placeholder="Your Name"
+                className="w-full pl-10 pr-4 py-3 bg-black text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* Email */}
+            <div className="relative">
+              <FaEnvelope className="absolute left-3 top-3.5 text-gray-500 text-sm" />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
                 className="w-full pl-10 pr-4 py-3 bg-black text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 onChange={handleChange}
               />

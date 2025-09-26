@@ -24,46 +24,45 @@ const testimonials = [
 ];
 
 function TestimonialsCarousel() {
-  const [current, setCurrent] = useState(0);
+  const [[current, direction], setCurrent] = useState([0, 0]);
   const length = testimonials.length;
 
-  const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
-  const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
+  const paginate = (newDirection) => {
+    setCurrent([
+      (current + newDirection + length) % length,
+      newDirection,
+    ]);
+  };
 
-  // Animation variants for smoother transitions
   const variants = {
     enter: (direction) => ({
-      x: direction > 0 ? 100 : -100,
+      x: direction > 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.9,
+      scale: 0.8,
     }),
     center: {
       x: 0,
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.5,
         type: "spring",
-        stiffness: 100,
+        stiffness: 120,
         damping: 20,
       },
     },
     exit: (direction) => ({
-      x: direction < 0 ? 100 : -100,
+      x: direction < 0 ? 300 : -300,
       opacity: 0,
-      scale: 0.9,
+      scale: 0.8,
       transition: { duration: 0.4 },
     }),
   };
 
   return (
-    <section
-      id="testimonials"
-      className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center px-4 md:px-[8%] bg-black"
-    >
+    <section className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center px-4 md:px-[8%] bg-black">
       {/* Heading */}
       <motion.div
-        className="relative z-10 text-center mb-12"
+        className="text-center mb-12"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -81,37 +80,39 @@ function TestimonialsCarousel() {
       <div className="relative w-full max-w-3xl flex items-center justify-center overflow-hidden">
         {/* Left Arrow */}
         <button
-          onClick={prevSlide}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-30 p-3 md:p-4 bg-cyan-500/70 hover:bg-cyan-500 text-black rounded-full shadow-lg transition flex items-center justify-center"
+          onClick={() => paginate(-1)}
+          className="absolute left-2 md:left-0 top-1/2 transform -translate-y-1/2 z-30 p-2 md:p-4 bg-cyan-500/70 hover:bg-cyan-500 text-black rounded-full shadow-lg transition flex items-center justify-center"
         >
           <FaChevronLeft size={20} />
         </button>
 
-        {/* AnimatePresence for slide animation */}
-        <AnimatePresence custom={1} initial={false}>
+        {/* AnimatePresence */}
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={current}
             variants={variants}
-            custom={1} // positive direction for next
+            custom={direction}
             initial="enter"
             animate="center"
             exit="exit"
-            className="relative w-full p-8 bg-black/70 backdrop-blur-md rounded-2xl shadow-lg border border-gray-800 mx-4"
+            className="relative w-full p-8 bg-black/70 backdrop-blur-md rounded-2xl shadow-lg border border-gray-800 mx-4 flex flex-col gap-4"
           >
-            <div className="flex items-start gap-3 text-cyan-400 mb-4">
+            <div className="flex items-start gap-3 text-cyan-400">
               <FaQuoteLeft size={24} />
-              <p className="text-gray-300">{testimonials[current].comment}</p>
+              <p className="text-gray-300 text-base md:text-lg">{testimonials[current].comment}</p>
               <FaQuoteRight size={24} />
             </div>
-            <p className="text-cyan-400 font-semibold mt-4">{testimonials[current].name}</p>
-            <p className="text-gray-400 text-sm">{testimonials[current].role}</p>
+            <div>
+              <p className="text-cyan-400 font-semibold">{testimonials[current].name}</p>
+              <p className="text-gray-400 text-sm">{testimonials[current].role}</p>
+            </div>
           </motion.div>
         </AnimatePresence>
 
         {/* Right Arrow */}
         <button
-          onClick={nextSlide}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 z-30 p-3 md:p-4 bg-cyan-500/70 hover:bg-cyan-500 text-black rounded-full shadow-lg transition flex items-center justify-center"
+          onClick={() => paginate(1)}
+          className="absolute right-2 md:right-0 top-1/2 transform -translate-y-1/2 z-30 p-2 md:p-4 bg-cyan-500/70 hover:bg-cyan-500 text-black rounded-full shadow-lg transition flex items-center justify-center"
         >
           <FaChevronRight size={20} />
         </button>
@@ -125,7 +126,7 @@ function TestimonialsCarousel() {
             className={`w-3 h-3 rounded-full cursor-pointer transition ${
               idx === current ? "bg-cyan-500" : "bg-gray-600"
             }`}
-            onClick={() => setCurrent(idx)}
+            onClick={() => setCurrent([idx, idx > current ? 1 : -1])}
           />
         ))}
       </div>

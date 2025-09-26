@@ -8,6 +8,9 @@ import Footer from "./components/Footer";
 import TestimonialsCarousel from "./components/Comments";
 import Carousel from "./components/Carousel";
 import Clients from "./components/Client";
+import Stats from "./components/Stats";
+import OurWork from "./components/OurWork";
+
 
 export default function Page() {
   return (
@@ -21,11 +24,14 @@ export default function Page() {
         <HomeSection />
          {/* <Carousel/> */}
       
+        <OurWork/>
         <About />
+
           <Services />
-        <Contact />
+        <Stats />
         <Clients/>
         <TestimonialsCarousel/>
+        <Contact />
       </main>
 
       {/* Footer */}
