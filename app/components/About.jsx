@@ -24,7 +24,7 @@ export default function AboutSection() {
   const images = [
     "/about_illustration_main.png",
     "/about_illustration.png",
-  ];
+  ];  
   const [current, setCurrent] = useState(0);
   const timeoutRef = useRef(null);
 
