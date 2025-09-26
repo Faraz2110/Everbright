@@ -5,7 +5,7 @@ function Home() {
   return (
     <motion.section
       id="home"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-[8%] text-center md:text-left bg-black overflow-hidden"
+      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-[8%] text-center md:text-left bg-black overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -21,12 +21,12 @@ function Home() {
 
       {/* Text Content */}
       <motion.div
-        className="relative z-10 w-full md:w-1/2 max-w-3xl"
+        className="relative z-10 w-full md:w-1/2 max-w-3xl flex flex-col items-center md:items-start"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
       >
-        <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase leading-tight drop-shadow-lg">
+        <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase leading-snug sm:leading-tight drop-shadow-lg">
           Kita Pasang Aircon and Electrical Services
         </h2>
 
@@ -34,26 +34,26 @@ function Home() {
           SERVICES YOU CAN TRUST
         </h2>
 
-        <p className="mt-6 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed drop-shadow-sm">
+        <p className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed sm:leading-relaxed drop-shadow-sm max-w-md">
           Expert installation, repair, and maintenance for all your air
           conditioning and electrical needs.
         </p>
 
-        <div className="mt-8">
+        <div className="mt-6 sm:mt-8 w-full flex justify-center md:justify-start">
           <a
             href="#contact"
-            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl shadow-lg hover:opacity-90 transition text-sm sm:text-base"
+            className="px-5 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl shadow-lg hover:opacity-90 transition text-sm sm:text-base"
           >
             Get a Free Quote
           </a>
         </div>
 
         {/* Image for Small Devices */}
-        <div className="mt-10 md:hidden flex justify-center">
+        <div className="mt-6 sm:mt-8 md:hidden flex justify-center w-full">
           <img
             src="/hometop.png"
             alt="Home Illustration"
-            className="max-w-xs sm:max-w-sm w-full drop-shadow-xl rounded-2xl"
+            className="w-72 sm:w-80 max-w-full drop-shadow-xl rounded-2xl"
           />
         </div>
       </motion.div>
@@ -65,7 +65,12 @@ function Home() {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
       >
-        {/* You can place desktop illustration/image here */}
+        {/* Desktop Illustration/Image (hidden on mobile) */}
+        <img
+          src="/hometop.png"
+          alt="Home Illustration"
+          className="hidden md:block w-96 lg:w-[28rem] rounded-2xl drop-shadow-xl"
+        />
       </motion.div>
     </motion.section>
   );

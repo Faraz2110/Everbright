@@ -11,29 +11,23 @@ import Clients from "./components/Client";
 import Stats from "./components/Stats";
 import OurWork from "./components/OurWork";
 
-
 export default function Page() {
   return (
-    <div className="min-h-screen flex flex-col font-sans">
+    <div className="min-h-screen flex flex-col font-sans relative">
       {/* Navbar */}
       <Header />
-
       {/* Main content */}
       <main className="flex-1">
-       
         <HomeSection />
-         {/* <Carousel/> */}
-      
-        <OurWork/>
+        {/* <Carousel/> */}
+        <OurWork />
         <About />
-
-          <Services />
+        <Services />
         <Stats />
-        <Clients/>
-        <TestimonialsCarousel/>
+        <Clients />
+        <TestimonialsCarousel />
         <Contact />
       </main>
-
       {/* Footer */}
       <Footer />
     </div>

@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { FaTools, FaBolt, FaRegSmileBeam, FaHandshake, FaClock } from "react-icons/fa";
+import {
+  FaTools,
+  FaBolt,
+  FaRegSmileBeam,
+  FaHandshake,
+  FaClock,
+} from "react-icons/fa";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 50 },
@@ -12,13 +20,35 @@ const fadeUpVariant = {
   }),
 };
 
-function About() {
-  const [mainLoaded, setMainLoaded] = useState(false);
+export default function AboutSection() {
+  const images = [
+    "/about_illustration_main.png",
+    "/about_illustration.png",
+  ];
+  const [current, setCurrent] = useState(0);
+  const timeoutRef = useRef(null);
+
+  // Auto-slide
+  useEffect(() => {
+    startAutoPlay();
+    return () => stopAutoPlay();
+  }, []);
+
+  const startAutoPlay = () => {
+    stopAutoPlay();
+    timeoutRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000);
+  };
+
+  const stopAutoPlay = () => {
+    if (timeoutRef.current) clearInterval(timeoutRef.current);
+  };
 
   return (
     <section
       id="about"
-      className="relative scroll-mt-24 py-12 sm:py-16 lg:py-24 px-4 md:px-[8%] bg-black flex flex-col lg:flex-row items-center gap-10 lg:gap-12 overflow-hidden"
+      className="bg-black scroll-mt-24 py-16 sm:py-20 lg:py-24 px-4 md:px-[8%] flex flex-col lg:flex-row items-center gap-10 lg:gap-12"
     >
       {/* Left Content */}
       <motion.div
@@ -50,10 +80,18 @@ function About() {
           Your Comfort, Our Priority
         </motion.h2>
         <motion.p className="mb-4" variants={fadeUpVariant} custom={0.3}>
-          At <span className="text-cyan-400 font-semibold">Kita Pasang</span>, we specialize in delivering reliable <span className="text-cyan-400">air conditioning</span> and <span className="text-cyan-400">electrical solutions</span> that make homes and offices safer, cooler, and energy-efficient. With years of experience, we’ve built a reputation for honesty, quality, and expert service.
+          At <span className="text-cyan-400 font-semibold">Kita Pasang</span>, we
+          specialize in delivering reliable <span className="text-cyan-400">air
+          conditioning</span> and <span className="text-cyan-400">electrical
+          solutions</span> that make homes and offices safer, cooler, and
+          energy-efficient.
         </motion.p>
+
         <motion.p className="mb-6" variants={fadeUpVariant} custom={0.4}>
-          Whether it’s <span className="text-cyan-400">AC installation</span>, <span className="text-cyan-400">electrical repair</span>, or <span className="text-cyan-400">lighting upgrades</span>, we approach every job with precision and care.
+          Whether it’s <span className="text-cyan-400">AC installation</span>,{" "}
+          <span className="text-cyan-400">electrical repair</span>, or{" "}
+          <span className="text-cyan-400">lighting upgrades</span>, we approach
+          every job with precision and care.
         </motion.p>
 
         {/* Why Choose Us Card */}
@@ -85,56 +123,74 @@ function About() {
         </motion.div>
       </motion.div>
 
-      {/* Right Illustration */}
-      <motion.div
-        className="flex-1 relative w-full max-w-xl"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <motion.div
-          className="relative w-full aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] overflow-hidden"
-          variants={fadeUpVariant}
-          custom={0.6}
-        >
-          {/* Main Image */}
-          <motion.div
-            className="absolute inset-0 rounded-3xl shadow-2xl border border-gray-800"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <Image
-              src="/about_illustration_main.png"
-              alt="Main Illustration"
-              fill
-              className="object-cover"
-              priority
-              onLoadingComplete={() => setMainLoaded(true)}
-            />
-          </motion.div>
-
-          {/* Secondary Image */}
-          {mainLoaded && (
+      {/* Right Carousel */}
+      <motion.div className="flex-1 w-full max-w-xl relative">
+        {/* Desktop Carousel */}
+        <div className="hidden sm:flex relative w-full aspect-[16/9] overflow-hidden rounded-2xl shadow-xl border border-gray-800">
+          <AnimatePresence initial={false}>
             <motion.div
-              className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 w-24 sm:w-32 md:w-40 h-24 sm:h-32 md:h-40 rounded-2xl shadow-lg border border-cyan-500 overflow-hidden"
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              whileHover={{ rotate: 3, scale: 1.05 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+              key={current}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+              className="absolute w-full h-full"
             >
               <Image
-                src="/about_illustration.png"
-                alt="Secondary Illustration"
+                src={images[current]}
+                alt={`About ${current + 1}`}
                 fill
-                className="object-cover"
+                className="object-cover object-center rounded-2xl"
               />
             </motion.div>
-          )}
-        </motion.div>
+          </AnimatePresence>
+
+          {/* Pagination Dots */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+            {images.map((_, idx) => (
+              <span
+                key={idx}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  idx === current ? "bg-cyan-500 scale-125" : "bg-gray-500"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Carousel */}
+        <div className="sm:hidden w-full h-64 relative overflow-hidden rounded-2xl shadow-xl border border-gray-800">
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+              className="absolute w-full h-full"
+            >
+              <Image
+                src={images[current]}
+                alt={`About ${current + 1}`}
+                fill
+                className="object-cover object-center rounded-2xl"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Pagination Dots */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+            {images.map((_, idx) => (
+              <span
+                key={idx}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  idx === current ? "bg-cyan-500 scale-125" : "bg-gray-500"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </motion.div>
     </section>
   );
 }
-
-export default About;

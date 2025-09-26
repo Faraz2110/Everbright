@@ -4,9 +4,6 @@ import { motion } from "framer-motion";
 const services = [
   { name: "Aircon Installation", description: "Professional AC installation for homes & offices.", price: 1200 },
   { name: "Aircon Chemical Service", description: "Deep cleaning & chemical treatment for ACs.", price: 300 },
-  { name: "Aircon Overhaul Chemical Service", description: "Full chemical overhaul for older AC units.", price: 500 },
-  { name: "Aircon Repair Service", description: "Expert repair for all types of AC issues.", price: 400 },
-  { name: "Aircon Gas Refill Service", description: "Refill AC gas for optimal cooling performance.", price: 350 },
 ];
 
 // Container animation for staggering children
@@ -37,13 +34,15 @@ export default function ServiceCards() {
       id="services"
       className="relative scroll-mt-24 py-16 sm:py-20 lg:py-24 px-4 md:px-[8%] bg-black overflow-hidden"
       initial="hidden"
-      animate="show"
-      variants={containerVariants} // parent container for staggered animation
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }} // ✅ animate only once
+      variants={containerVariants}
     >
       {/* Heading */}
       <motion.div
         className="relative z-10 text-center mb-12"
-        variants={headingVariants} // heading animation
+        variants={headingVariants}
+        viewport={{ once: true, amount: 0.3 }}
       >
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-cyan-500 uppercase">
           Our Services
@@ -53,15 +52,15 @@ export default function ServiceCards() {
         </p>
       </motion.div>
 
-      {/* Cards container needs to be motion.div to enable stagger */}
+      {/* Cards container */}
       <motion.div
         className="max-w-7xl mx-auto grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        variants={containerVariants} // apply stagger here
+        variants={containerVariants} // stagger children
       >
         {services.map((service, index) => (
           <motion.div
             key={index}
-            variants={cardVariants} // each card animates
+            variants={cardVariants} // animate each card
             whileHover={{ scale: 1.05, y: -5 }}
             className="bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col cursor-pointer"
           >
