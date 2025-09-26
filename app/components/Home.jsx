@@ -5,7 +5,7 @@ function Home() {
   return (
     <motion.section
       id="home"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-[8%] text-center md:text-left bg-black overflow-hidden"
+      className="relative mt-14 pt-6 md:min-h-screen flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start px-4 sm:px-6 md:px-[8%] text-center md:text-left bg-black overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -21,7 +21,7 @@ function Home() {
 
       {/* Text Content */}
       <motion.div
-        className="relative z-10 w-full md:w-1/2 max-w-3xl flex flex-col items-center md:items-start"
+        className="relative z-10 w-full md:w-1/2 max-w-3xl flex flex-col items-center md:items-start text-center md:text-left"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
@@ -53,24 +53,9 @@ function Home() {
           <img
             src="/hometop.png"
             alt="Home Illustration"
-            className="w-72 sm:w-80 max-w-full drop-shadow-xl rounded-2xl"
+            className="w-100 sm:w-80 max-w-full drop-shadow-xl rounded-2xl"
           />
         </div>
-      </motion.div>
-
-      {/* Illustration (Right Side for Desktop) */}
-      <motion.div
-        className="relative z-10 w-full md:w-1/2 mt-8 md:mt-0 flex justify-center"
-        initial={{ x: 20, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-      >
-        {/* Desktop Illustration/Image (hidden on mobile) */}
-        <img
-          src="/hometop.png"
-          alt="Home Illustration"
-          className="hidden md:block w-96 lg:w-[28rem] rounded-2xl drop-shadow-xl"
-        />
       </motion.div>
     </motion.section>
   );

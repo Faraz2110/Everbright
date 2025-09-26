@@ -50,7 +50,7 @@ export default function OurWork() {
   return (
     <motion.section
       id="our-work"
-      className="bg-black scroll-mt-24 py-16 sm:py-20 lg:py-24 px-4 md:px-[8%]"
+      className="bg-black scroll-mt-24 lg:py-24 px-4 md:px-[8%]"
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.3 }}

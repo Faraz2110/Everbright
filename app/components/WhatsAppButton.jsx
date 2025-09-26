@@ -27,15 +27,16 @@ const WhatsAppButton = () => {
 
       {/* WhatsApp button */}
       <motion.a
-        href="https://wa.me/+60198717647"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="relative bg-green-500 text-white p-4 rounded-full shadow-lg flex items-center justify-center"
-        whileHover={{ scale: 1.2 }}
-        transition={{ type: "spring", stiffness: 300, damping: 15 }}
-      >
-        <FaWhatsapp size={28} />
-      </motion.a>
+  href="https://wa.me/60198717647?text=Hello%2C%20I%27m%20interested%20in%20your%20Aircon%20and%20Electrical%20Services.%20Could%20you%20please%20provide%20more%20details%3F"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="relative bg-green-500 text-white p-4 rounded-full shadow-lg flex items-center justify-center"
+  whileHover={{ scale: 1.2 }}
+  transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+>
+  <FaWhatsapp size={28} />
+</motion.a>
+
     </div>
   );
 };
